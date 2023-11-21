@@ -3,5 +3,5 @@
 	alias : "hello",
 	cover : "cover.jpeg",
 	teaser : "Hello world article ololol",
-	published : Some("2014-01-01"),
+	published : "2014-01-01",
 )

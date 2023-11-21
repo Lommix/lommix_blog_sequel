@@ -8,8 +8,8 @@ use axum::{
 use maud::{html, PreEscaped};
 use pulldown_cmark::{Options, Parser};
 
-use crate::AppState;
 use super::layout;
+use crate::AppState;
 
 pub struct PageMeta {
     pub title: String,
@@ -20,17 +20,8 @@ pub struct PageMeta {
 pub async fn home(State(state): State<Arc<AppState>>) -> Response {
     let articles = state
         .articles
-        .clone()
-        .map(|(path, meta)| {
-            html! {
-                div {
-                    a href=(format!("/article/{}", meta.alias)) {
-                        h1 { (meta.title) }
-                    }
-                    p { (meta.teaser) }
-                }
-            }
-        })
+        .iter()
+        .map(|article| super::common::article_preview(&article.meta))
         .collect::<Vec<_>>();
 
     layout::base(
@@ -61,30 +52,24 @@ pub async fn about() -> Response {
 }
 
 pub async fn article(Path(alias): Path<String>, State(state): State<Arc<AppState>>) -> Response {
-    let (path, meta) = match state
-        .articles
-        .clone()
-        .filter(|(_, meta)| meta.alias == alias)
-        .nth(0)
-    {
-        Some(a) => a,
+    let mut article = match state.articles.find_by_alias(&alias) {
+        Some(a) => a.clone(),
         None => return (StatusCode::NOT_FOUND, "Not Found").into_response(),
     };
 
-    let markdown = tokio::fs::read_to_string(path).await.unwrap();
-
-    let mut options = Options::empty();
-    options.insert(Options::ENABLE_STRIKETHROUGH);
-    let parser = Parser::new_ext(&markdown, options);
-
-    let mut html_output = String::new();
-    pulldown_cmark::html::push_html(&mut html_output, parser);
+    match article.compile().await {
+        Ok(_) => {}
+        Err(e) => {
+            println!("{:?}", e);
+            return (StatusCode::INTERNAL_SERVER_ERROR, "Internal Server Error").into_response();
+        }
+    }
 
     let content = html! {
         div class="markdown" {
-            (PreEscaped(html_output))
+            (PreEscaped(&article.compiled.unwrap()))
         }
     };
 
-    layout::base(&meta.into(), &content).into_response()
+    layout::base(&article.meta.clone().into(), &content).into_response()
 }

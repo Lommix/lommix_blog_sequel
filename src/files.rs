@@ -1,15 +1,63 @@
 use std::path::PathBuf;
 
 use axum::{body::StreamBody, http::Uri, response::IntoResponse};
+use pulldown_cmark::Options;
+use pulldown_cmark::Parser;
 use serde::Deserialize;
 
 use crate::pages::PageMeta;
 
-#[derive(Deserialize, Clone, Debug)]
+const ALLOWED_EXTENSIONS: [&str; 12] = [
+    "md", "ron", "jpg", "jpgeg", "png", "gif", "webm", "wasm", "js", "css", "html", "ico",
+];
+
+#[derive(Debug)]
+pub struct Articles(Vec<Article>);
+impl Articles {
+    pub fn find_by_alias(&self, alias: &str) -> Option<&Article> {
+        self.0.iter().find(|a| a.meta.alias == alias)
+    }
+    pub fn iter(&self) -> std::slice::Iter<Article> {
+        self.0.iter()
+    }
+
+    pub fn from_dir(path: PathBuf) -> anyhow::Result<Self> {
+        Ok(Self(BlogFsIter::new(path)?.collect()))
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct Article {
+    pub meta: ArticleMeta,
+    pub source: PathBuf,
+    pub compiled: Option<String>,
+    pub files: Vec<PathBuf>,
+}
+
+impl Article {
+    pub fn valid(&self) -> bool {
+        println!("{:?}", self);
+        self.source.exists() && !self.meta.title.is_empty()
+    }
+
+    pub async fn compile(&mut self) -> anyhow::Result<()> {
+        let raw = tokio::fs::read_to_string(&self.source).await?;
+        let mut options = Options::empty();
+        options.insert(Options::ENABLE_STRIKETHROUGH);
+        let parser = Parser::new_ext(&raw, options);
+        let mut html_output = String::new();
+        pulldown_cmark::html::push_html(&mut html_output, parser);
+        self.compiled = Some(html_output);
+        Ok(())
+    }
+}
+
+#[derive(Deserialize, Clone, Debug, Default)]
 pub struct ArticleMeta {
     pub title: String,
     pub alias: String,
-    pub published: Option<String>,
+    pub cover: String,
+    pub published: String,
     pub teaser: String,
 }
 
@@ -25,14 +73,14 @@ impl Into<PageMeta> for ArticleMeta {
 
 #[derive(Debug, Clone)]
 pub struct BlogFsIter {
-    files: Vec<(PathBuf, ArticleMeta)>,
+    files: Vec<Article>,
 }
 
-fn read_blog_path(path: PathBuf) -> anyhow::Result<Vec<(PathBuf, ArticleMeta)>> {
+fn read_blog_path(path: PathBuf) -> anyhow::Result<Vec<Article>> {
     let mut out = Vec::new();
     let dir = std::fs::read_dir(path)?;
-    let mut markdown = None;
-    let mut meta = None;
+
+    let mut article = Article::default();
     dir.into_iter()
         .flatten()
         .for_each(|file| match file.path().is_dir() {
@@ -49,21 +97,29 @@ fn read_blog_path(path: PathBuf) -> anyhow::Result<Vec<(PathBuf, ArticleMeta)>> 
                     Some(ext) => ext.to_str().unwrap_or(""),
                     None => return,
                 };
-                match extension {
-                    "md" => {
-                        markdown = Some(path);
+
+                let file_name = file.file_name().to_str().unwrap_or("");
+
+                match file.file_name().to_str().unwrap_or("") {
+                    "meta.ron" => {
+                        article.meta =
+                            ron::from_str::<ArticleMeta>(&std::fs::read_to_string(path).unwrap())
+                                .unwrap();
                     }
-                    "ron" => {
-                        meta = Some(path);
+                    "content.md" => {
+                        article.source = path;
                     }
-                    _ => {}
+                    _ => {
+                        if ALLOWED_EXTENSIONS.contains(&extension) {
+                            article.files.push(path);
+                        }
+                    }
                 }
             }
         });
 
-    if let (Some(markdown), Some(meta)) = (markdown, meta) {
-        let m = ron::from_str::<ArticleMeta>(&std::fs::read_to_string(meta)?)?;
-        out.push((markdown, m));
+    if article.valid() {
+        out.push(article);
     }
 
     Ok(out)
@@ -77,7 +133,7 @@ impl BlogFsIter {
 }
 
 impl std::iter::Iterator for BlogFsIter {
-    type Item = (PathBuf, ArticleMeta);
+    type Item = Article;
     fn next(&mut self) -> Option<Self::Item> {
         self.files.pop()
     }
@@ -105,4 +161,9 @@ pub async fn static_files(uri: Uri) -> axum::response::Response {
     let headers = [(axum::http::header::CONTENT_TYPE, content_type)];
 
     (headers, body).into_response()
+}
+
+pub async fn media(uri: Uri) -> axum::response::Response {
+    let path = PathBuf::from(uri.path());
+    path.to_str().unwrap().to_string().into_response()
 }

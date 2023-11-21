@@ -1,0 +1,7 @@
+(
+	title : "Hello world article",
+	alias : "hello",
+	cover : "cover.jpeg",
+	teaser : "Hello world article ololol",
+	published : Some("2014-01-01"),
+)

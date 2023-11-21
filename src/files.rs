@@ -3,12 +3,24 @@ use std::path::PathBuf;
 use axum::{body::StreamBody, http::Uri, response::IntoResponse};
 use serde::Deserialize;
 
+use crate::pages::PageMeta;
+
 #[derive(Deserialize, Clone, Debug)]
 pub struct ArticleMeta {
     pub title: String,
     pub alias: String,
     pub published: Option<String>,
     pub teaser: String,
+}
+
+impl Into<PageMeta> for ArticleMeta {
+    fn into(self) -> PageMeta {
+        PageMeta {
+            title: self.title,
+            description: self.teaser,
+            keywords: "".into(),
+        }
+    }
 }
 
 #[derive(Debug, Clone)]

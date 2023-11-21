@@ -1,13 +1,17 @@
 use maud::{html, Markup};
 
-pub fn base(title: &str, content: &Markup) -> Markup {
+use crate::pages::PageMeta;
+
+pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
     html! {
         html {
             head {
                 meta charset="utf-8";
-                title { (title) }
-                // Add your CSS, JavaScript, or other head elements here
+                title { (meta.title) };
                 link rel="stylesheet" href="/assets/main.css";
+                // meta
+                meta name="title" content="(meta.description)";
+                meta name="description" content="This is my website";
             }
             body {
                 (header())
@@ -15,26 +19,32 @@ pub fn base(title: &str, content: &Markup) -> Markup {
                     (content)
                 }
                 (footer())
-
                 script src="/assets/main.js" type="module" {}
             }
         }
     }
 }
 
-
 pub fn header() -> Markup {
     html! {
         header {
-            h1 { "Website Header" }
+            img src="/assets/images/new_banner.svg" alt="Banner" class="banner";
+            div {
+                span alt="" { "[ Lommix's Blog ]" }
+                nav {
+                    a href="/" { "Home" }
+                    a href="/about" { "About" }
+                }
+            }
         }
     }
 }
 pub fn footer() -> Markup {
     html! {
         footer {
+            a href="https://github.com" {"Github"}
+            a href="https://youtube.com" {"Youtube"}
             p { "Copyright © 2023" }
-            // Add your footer content here
         }
     }
 }

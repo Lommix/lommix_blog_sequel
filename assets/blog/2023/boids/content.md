@@ -3,7 +3,7 @@
 Quadtrees are data structures for holding spatial information with a complexity of log(N) for collision detection. These are the foundation of every physics engine. They are also great for boid simulations. Here is an example running in Wasm.
 
 
-<bevy-runner wasm-path="/media/boids/boids-quadtree_bg.wasm" canvas-id="boid-canvas" script-path="/media/boids/boids-quadtree.js" height="800" style="background-color:black;">
+<bevy-runner wasm-path="/media/boids/boids-quadtree_bg.wasm.gz" canvas-id="boid-canvas" script-path="/media/boids/boids-quadtree.js" height="800" style="background-color:black;">
     <img style="margin: 0 auto;display:block;" src="/media/boids/cover.jpg"/>
 </bevy-runner>
 

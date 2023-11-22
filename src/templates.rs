@@ -21,6 +21,7 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
                 script src="/assets/js/highlight.min.js" {}
                 script src="/assets/js/htmx.min.js"{}
                 script src="/assets/js/response-targets.js" {}
+                script src="/assets/js/pako.min.js" {}
                 script src="/assets/main.js" type="module" {}
 
                 script {"hljs.highlightAll();"};

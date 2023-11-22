@@ -11,8 +11,8 @@ use serde::Deserialize;
 use crate::pages::PageMeta;
 use crate::AppState;
 
-const ALLOWED_EXTENSIONS: [&str; 11] = [
-    "jpg", "jpeg", "svg", "png", "gif", "webm", "wasm", "js", "css", "html", "ico",
+const ALLOWED_EXTENSIONS: [&str; 12] = [
+    "jpg", "jpeg", "svg", "gz", "png", "gif", "webm", "wasm", "js", "css", "html", "ico",
 ];
 
 #[derive(Debug)]

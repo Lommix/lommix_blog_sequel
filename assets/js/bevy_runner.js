@@ -99,7 +99,8 @@ class BevyRunner extends HTMLElement {
 
 		fetch(wasm_path)
 			.then((res) => res.arrayBuffer())
-			.then(async (bytes) => {
+			.then(async (compressedBytes) => {
+				const bytes = pako.inflate(new Uint8Array(compressedBytes));
 				await script.initSync(bytes);
 				await script.init();
 				this.loadingScreen.style.display = "none";

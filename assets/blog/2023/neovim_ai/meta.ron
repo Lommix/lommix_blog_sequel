@@ -1,0 +1,7 @@
+(
+	title : "How to add a full team of private specialists to Neovim. Local AI on steroids.",
+	alias : "neovim-ai",
+	cover : "media/neovim-ai/ai_cover.jpg",
+	teaser : "Imagine being able to have a full team of specialists at your fingertips wherever you go, with 100% private, uncensored, and predefined models tailored to your specific needs. No need to dream anymore - modern FOSS models make this a reality! Let's implement them into your Neovim workflow. It's easier than you think.",
+	published : "19.10.2023",
+)

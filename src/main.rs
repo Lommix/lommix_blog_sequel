@@ -3,10 +3,9 @@ use clap::Parser;
 use files::Articles;
 use std::sync::Arc;
 
-mod common;
 mod files;
-mod layout;
 mod pages;
+mod templates;
 
 #[derive(Debug)]
 pub struct AppState {
@@ -31,7 +30,7 @@ async fn main() {
                 .route("/", get(pages::home))
                 .route("/about", get(pages::about))
                 .route("/article/:alias", get(pages::article))
-                .route("/media/:alias/:media", get(files::media))
+                .route("/media/:alias/:file", get(files::media))
                 .route("/assets/*path", get(files::static_files))
                 .route("/favicon.ico", get(files::static_files))
                 .with_state(Arc::new(AppState {

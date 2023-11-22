@@ -1,0 +1,7 @@
+(
+	title : "My top 3 Neovim snipptets",
+	alias : "top-neovim-scripts",
+	cover : "media/top-neovim-scripts/neovim.jpg",
+	teaser : "The primary advantage of Neovim lies in its extensibility. It allows for the seamless addition of any step, process, or functionality you may require through Lua. More often than not, you'll find a plugin that caters to your specific needs. However, it's not uncommon to encounter a plugin designed for a single function that could be accomplished in just a few lines.",
+	published : "30.09.2023",
+)

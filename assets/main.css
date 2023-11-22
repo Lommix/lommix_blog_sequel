@@ -1,18 +1,14 @@
+@import url('css/pico.min.css');
+@import url('css/header.css');
+@import url('css/footer.css');
+
 body{
 	scroll-behavior: smooth;
- 	font-family: 'Noto Sans JP', sans-serif;
-	font-size: 1rem;
-	line-height: 1.2rem;
 }
 
-.markdown{
-	& > *{
-		margin: 1rem 0;
-	}
-	& > h1{
-		font-size: 2.5rem;
-	}
-	& > h2{
-		font-size: 2rem;
+.preview{
+	margin-top: 3rem;
+	img{
+		max-width: 630px;
 	}
 }

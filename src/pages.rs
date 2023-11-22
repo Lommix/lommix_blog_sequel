@@ -6,9 +6,8 @@ use axum::{
     response::{IntoResponse, Response},
 };
 use maud::{html, PreEscaped};
-use pulldown_cmark::{Options, Parser};
 
-use super::layout;
+use super::templates;
 use crate::AppState;
 
 pub struct PageMeta {
@@ -21,10 +20,10 @@ pub async fn home(State(state): State<Arc<AppState>>) -> Response {
     let articles = state
         .articles
         .iter()
-        .map(|article| super::common::article_preview(&article.meta))
+        .map(|article| templates::article_preview(&article.meta))
         .collect::<Vec<_>>();
 
-    layout::base(
+    templates::base(
         &PageMeta {
             title: "Home".into(),
             description: "Home".into(),
@@ -40,13 +39,16 @@ pub async fn home(State(state): State<Arc<AppState>>) -> Response {
 }
 
 pub async fn about() -> Response {
-    super::layout::base(
+    let content = super::files::read_markdown("assets/content/about.md".into())
+        .await
+        .unwrap();
+    templates::base(
         &PageMeta {
             title: "About".into(),
             description: "About".into(),
             keywords: "".into(),
         },
-        &html!("about"),
+        &html!((PreEscaped(&content))),
     )
     .into_response()
 }
@@ -71,5 +73,5 @@ pub async fn article(Path(alias): Path<String>, State(state): State<Arc<AppState
         }
     };
 
-    layout::base(&article.meta.clone().into(), &content).into_response()
+    templates::base(&article.meta.clone().into(), &content).into_response()
 }

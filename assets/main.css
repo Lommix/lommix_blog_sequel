@@ -1,14 +1,25 @@
 @import url('css/pico.min.css');
 @import url('css/header.css');
+@import url('css/content.css');
 @import url('css/footer.css');
 
 body{
 	scroll-behavior: smooth;
 }
 
+main{
+}
+
 .preview{
 	margin-top: 3rem;
+
+	a{
+		text-decoration: none;
+		&:hover{
+			color : #1f293b;
+		}
+	}
 	img{
-		max-width: 630px;
+		width:630px;
 	}
 }

@@ -32,8 +32,10 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
 pub fn header() -> Markup {
     html! {
         header class="container"{
-            img src="/assets/images/new_banner.svg" alt="Banner" class="banner";
-            div class="grid" {
+            div class="image" {
+                img class="banner" src="/assets/images/new_banner.svg" alt="Banner" {};
+            }
+            div class="header-bar" {
                 h1 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
@@ -50,11 +52,12 @@ pub fn header() -> Markup {
 /// footer template
 pub fn footer() -> Markup {
     html! {
-        footer class="container"{
-            div class="grid"{
-                a href="https://github.com" {"Github"}
-                a href="https://youtube.com" {"Youtube"}
-                p { "Copyright © 2023" }
+        footer {
+            nav class="footer-navbar"{
+                ul {
+                    li {a href="https://github.com" {"Github"}}
+                    li {a href="https://youtube.com" {"Youtube"}}
+                }
             }
         }
     }

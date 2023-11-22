@@ -20,7 +20,6 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
 
                 script src="/assets/js/highlight.min.js" {}
                 script src="/assets/js/htmx.min.js"{}
-                script src="/assets/js/response-targets.js" {}
                 script src="/assets/js/pako.min.js" {}
                 script src="/assets/main.js" type="module" {}
 
@@ -40,8 +39,8 @@ pub fn header() -> Markup {
                 h1 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
-                        li { a href="/" { "Home" } }
-                        li { a href="/about" { "About" } }
+                        li { a href="/" { "[ Home ]" } }
+                        li { a href="/about" { "[ About ]" } }
                     }
                 }
             }
@@ -56,8 +55,9 @@ pub fn footer() -> Markup {
         footer {
             nav class="footer-navbar"{
                 ul {
-                    li {a href="https://github.com" {"Github"}}
-                    li {a href="https://youtube.com" {"Youtube"}}
+                    li {a href="https://github.com/Lommix" alt="Github" {"[ Github ]"}}
+                    li {a href="https://www.youtube.com/channel/UCd1BUXaUHWnnNLWknIgxFHg" alt="Youtube" {"[ Youtube ]"}}
+                    li {a href="https://github.com/Lommix/lommix_blog_sequel" alt="Source" {"[ Source ]"}}
                 }
             }
         }

@@ -1,3 +1,4 @@
+@import url('css/highlight.css');
 @import url('css/pico.min.css');
 @import url('css/header.css');
 @import url('css/content.css');
@@ -5,6 +6,8 @@
 
 body{
 	scroll-behavior: smooth;
+	background: linear-gradient(to top, #1b2638, #020617);
+	/* background: #020617; */
 }
 
 main{

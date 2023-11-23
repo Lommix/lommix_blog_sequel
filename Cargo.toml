@@ -11,6 +11,7 @@ axum = { version = "0.6.20", features = ["macros", "tracing", "multipart", "head
 axum-server = { version = "0.5.1", features = ["tls-rustls"] }
 chrono = "0.4.31"
 clap = { version = "4.4.8", features = ["derive", "env"] }
+dotenv = "0.15.0"
 maud = { version = "0.25.0", features = ["axum", "axum-core", "futures-util"] }
 mime_guess = "2.0.4"
 pulldown-cmark = { version = "0.9.3", features = ["simd"] }

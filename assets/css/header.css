@@ -25,19 +25,23 @@ header{
 	}
 
 	.header-bar{
-		display:flex;
-		justify-content: space-between;
 		.logo{
+			margin: 0;
 			a{
 				color: white;
 				text-decoration: none;
 			}
 		}
 		.navbar{
+			display: flex;
+			justify-content: start;
+			@media (min-width: 768px){
+				justify-content: end;
+			}
+
 			a{
 				color: white;
 				font-weight: bold;
-				margin-left: 0.25rem;
 			}
 		}
 

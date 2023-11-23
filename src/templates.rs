@@ -44,8 +44,8 @@ pub fn header() -> Markup {
             div class="image" {
                 img class="banner" src="/assets/images/new_banner.svg" alt="Banner" {};
             }
-            div class="header-bar" {
-                h1 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
+            div class="header-bar grid" {
+                h2 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
                         li { a href="/" { "[ Home ]" } }

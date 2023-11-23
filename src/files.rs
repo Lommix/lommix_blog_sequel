@@ -82,6 +82,7 @@ impl Into<PageMeta> for ArticleMeta {
             title: self.title,
             description: self.teaser,
             keywords: "".into(),
+            image: Some(self.cover),
         }
     }
 }

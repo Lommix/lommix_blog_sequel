@@ -9,8 +9,17 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
                 title { (meta.title) };
                 link rel="stylesheet" href="/assets/main.css";
                 // meta
-                meta name="title" content="(meta.title)";
-                meta name="description" content="(meta.description)";
+                meta name="title" content=(meta.title);
+                meta name="author" content="lommix";
+                meta name="description" content=(meta.description);
+                meta name="keywords" content=(meta.keywords);
+
+                @if let Some(image) = &meta.image {
+                    meta property="og:image" content=(format!("https://lommix.de/{}", image));
+                }
+
+                meta name="og:title" content=(meta.title);
+                meta name="og:description" content=(meta.description);
             }
             body {
 
@@ -55,9 +64,9 @@ pub fn footer() -> Markup {
         footer {
             nav class="footer-navbar"{
                 ul {
-                    li {a href="https://github.com/Lommix" alt="Github" {"[ Github ]"}}
-                    li {a href="https://www.youtube.com/channel/UCd1BUXaUHWnnNLWknIgxFHg" alt="Youtube" {"[ Youtube ]"}}
-                    li {a href="https://github.com/Lommix/lommix_blog_sequel" alt="Source" {"[ Source ]"}}
+                    li {a href="https://github.com/Lommix" alt="Github" target="_blank" {"[ Github ]"}}
+                    li {a href="https://www.youtube.com/channel/UCd1BUXaUHWnnNLWknIgxFHg" target="_blank" alt="Youtube" {"[ Youtube ]"}}
+                    li {a href="https://github.com/Lommix/lommix_blog_sequel" target="_blank" alt="Source" {"[ Source ]"}}
                 }
             }
         }

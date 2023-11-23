@@ -23,6 +23,6 @@ In rust, we can represent such a type with an enum!
 ```rust
 enum Node{
     Branch(Box<[Node;4]>),
-    Leaf(Box<Vec<BodyId>>),
+    Leaf(Vec<BodyId>),
 }
 ```

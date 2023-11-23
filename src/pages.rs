@@ -14,6 +14,7 @@ pub struct PageMeta {
     pub title: String,
     pub description: String,
     pub keywords: String,
+    pub image: Option<String>,
 }
 
 pub async fn home(State(state): State<Arc<AppState>>) -> Response {
@@ -25,9 +26,10 @@ pub async fn home(State(state): State<Arc<AppState>>) -> Response {
 
     templates::base(
         &PageMeta {
-            title: "Home".into(),
-            description: "Home".into(),
-            keywords: "".into(),
+            title: "Lommix's Blog".into(),
+            description: "Gamedev, web wizardry & educational content".into(),
+            keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
+            image: Some("assets/images/new_banner.svg".into()),
         },
         &html!(
             @for article in articles {
@@ -45,8 +47,9 @@ pub async fn about() -> Response {
     templates::base(
         &PageMeta {
             title: "About".into(),
-            description: "About".into(),
-            keywords: "".into(),
+            description: "My name is Lorenz, a web/game developer from Germany with a passion for exploring and learning new things.".into(),
+            keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
+            image: None,
         },
         &html!((PreEscaped(&content))),
     )

@@ -1,6 +1,6 @@
 # Lommix Blog Website
 
-simple standalone blog website using markdown and files as post with support for Videos and Wasm using web-components.
+Simple standalone blog website using markdown file routing with support for Video and Wasm using web-components.
 
 ## Used Technologies
 

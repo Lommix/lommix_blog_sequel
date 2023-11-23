@@ -78,7 +78,7 @@ pub fn article_preview(meta: &ArticleMeta) -> maud::Markup {
     html! {
         div class="grid preview"{
             a href=(format!("/article/{}", meta.alias)) {
-                image src=(meta.cover);
+                image width="630" src=(meta.cover);
             };
             div class="container"{
                 a href=(format!("/article/{}", meta.alias)) {

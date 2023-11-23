@@ -5,7 +5,7 @@ No need to dream anymore - modern FOSS models make this a reality! Let's impleme
 
 <div style="height: 250px; overflow:hidden;">
     <video height="600" width="800" autoplay loop>
-      <source src="/media/neovim-ai/grug_ai.webm" type="video/webm">
+      <source src="/media/ai_on_steriods/grug_ai.webm" type="video/webm">
     </video>
 </div>
 

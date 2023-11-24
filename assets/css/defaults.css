@@ -136,6 +136,7 @@ p,code {
 }
 
 code{
+	line-height: 1.75rem;
 	font-size: 1.25rem;
 	display: block;
 	overflow-x:auto;

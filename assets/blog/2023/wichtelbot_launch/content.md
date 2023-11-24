@@ -1,4 +1,4 @@
-Launching Wichtelbot.com
+# Launching Wichtelbot.com
 
 The joy of Christmas is undeniable, but the task of finding gifts for an ever-growing family can be daunting. That's why I've implemented a solution that has not only been successful in my own family for three consecutive years, but is also adaptable for any family or group.
 

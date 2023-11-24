@@ -74,9 +74,12 @@ class BevyRunner extends HTMLElement {
 			font-size: 1.5rem;
 			font-weight: 600;
 			color: #FFFFFF;
+			background-color: #8fb1dc;
+			cursor: pointer;
 			border: none;
 			border-radius: 3px;
 		`;
+
 
 		this.loadButton.innerHTML = "Load & Play";
 		this.loadButton.onclick = () => this.load();

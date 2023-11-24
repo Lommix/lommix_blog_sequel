@@ -1,15 +1,15 @@
 header{
+	width: 100%;
 	padding-bottom: 0!important;
 	.image{
 		display: block;
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		img{
+		.banner{
 			width: 100%;
 		}
 	}
-
 	.image::before{
 		content: "";
 		display: block;
@@ -25,32 +25,51 @@ header{
 	}
 
 	.header-bar{
-		.logo{
+		margin-top: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		.logo {
+			padding: 0;
 			margin: 0;
-			a{
-				color: white;
-				text-decoration: none;
-			}
 		}
-		.navbar{
+		.navbar {
 			display: flex;
 			justify-content: start;
-			@media (min-width: 768px){
-				justify-content: end;
-			}
-
-			a{
-				color: white;
-				font-weight: bold;
-			}
+			font-weight: bold;
 		}
-
-	}
-
-	p{
-		font-style: italic;
 	}
 	padding: 0;
 	margin: 0;
 }
 
+.logo a {
+	font-size: 2.5rem;
+	line-height: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+	.logo a {
+		font-size: 2rem;
+		line-height: 2.5rem;
+	}
+
+	.header-bar {
+		flex-direction: column;
+		align-items: center;
+	}
+	header p{
+		text-align: center;
+	}
+}
+
+header ul {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+	padding: 0;
+	margin: 0;
+}
+
+header p {
+	font-style: italic;
+}

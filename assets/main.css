@@ -1,35 +1,5 @@
+@import url('css/defaults.css');
 @import url('css/highlight.css');
-@import url('css/pico.min.css');
 @import url('css/header.css');
 @import url('css/content.css');
 @import url('css/footer.css');
-
-body{
-	scroll-behavior: smooth;
-	background: linear-gradient(to top, #1b2638, #020617);
-	a{color : white;}
-	text-decoration: none;
-}
-
-a{
-	color:white!important;
-	text-decoration: none;
-}
-
-a:hover{
-	text-decoration: underline;
-}
-
-p, h1, h2, h3, h4, h5, h6{
-	color:white;
-}
-
-.preview{
-	margin-top: 3rem;
-	a{
-		text-decoration: none;
-		&:hover{
-			color : #1f293b;
-		}
-	}
-}

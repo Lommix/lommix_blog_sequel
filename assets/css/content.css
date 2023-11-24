@@ -1,2 +1,46 @@
 main{
+	width: 100%;
+	margin: 5rem 0;
+
+}
+
+main ul {
+	padding: 0 0 0 2rem;
+	list-style: disc;
+}
+
+main a {
+	color : #86d4de;
+}
+
+.preview{
+	margin-top: 3rem;
+	width: 100%;
+	grid-template-columns: 1fr; /* Single-column layout */
+	display: grid;
+	gap: 2rem; /* Adjust the gap between grid items as needed */
+}
+
+.preview > * {
+	width: 100%;
+}
+
+.preview h2{
+	margin: 0;
+	padding-top: 0;
+}
+
+.preview img {
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	width: 100%;
+}
+
+main img {
+	max-width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+	.preview {
+		grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+	}
 }

@@ -6,4 +6,5 @@ Simple standalone blog website using markdown file routing with support for Vide
 
 -   Axum, Tokio, Tower, Maud (Rust Backend)
 -   HtmX (minimalist Frontend reactivity)
--   PicoCSS (CSS Framework)
+-   Plain CSS and JS
+-   No build-step outside of Rust

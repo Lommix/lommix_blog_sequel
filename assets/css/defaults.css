@@ -1,0 +1,154 @@
+a,p,h1,h2,h3,h4,h5,h6,ul{
+	color: white;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul,ol{
+	list-style: none;
+}
+
+body{
+	scroll-behavior: smooth;
+	background: linear-gradient(to top, #1b2638, #020617);
+	text-decoration: none;
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Roboto', sans-serif;
+	padding: 0  1rem;
+}
+
+main, header{
+	max-width: 1450px;
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    padding: 2rem 0;
+}
+h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding: 2rem 0;
+}
+h3 {
+    font-size: 1.5rem;
+    line-height: 1rem;
+    padding: 1rem 0;
+}
+h4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    padding: 2rem 0;
+}
+h5 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+h6 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+}
+
+a, p, li {
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        padding: 1.5rem 0;
+    }
+    h2 {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+        padding: 1.5rem 0;
+    }
+    h3 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        padding: 1rem 0;
+    }
+    h4 {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+        padding: 1.5rem 0;
+    }
+    h5 {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+    }
+    h6 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    a, p {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 1rem 0;
+    }
+    h2 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        padding: 1rem 0;
+    }
+    h3 {
+        font-size: 1.1rem;
+        line-height: 1.3rem;
+        padding: 0.75rem 0;
+    }
+    h4 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+        padding: 1rem 0;
+    }
+    h5 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+    h6 {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
+    a, p{
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+}
+
+p,code {
+	padding: 1rem 0;
+}
+
+code{
+	font-size: 1.25rem;
+	display: block;
+	overflow-x:auto;
+	background-color: #24283b;
+	padding: 1rem;
+	border-radius: 0.3rem;
+}
+
+
+a:hover{
+	color: #8fb1dc; /* Set the underline color */
+}
+
+a:hover h2{
+	color: #8fb1dc; /* Set the underline color */
+}

@@ -8,6 +8,7 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
                 meta charset="utf-8";
                 title { (meta.title) };
                 link rel="stylesheet" href="/assets/main.css";
+
                 // meta
                 meta name="title" content=(meta.title);
                 meta name="author" content="lommix";
@@ -24,7 +25,7 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
             body {
 
                 (header())
-                main class="container" {(content)}
+                main {(content)}
                 (footer())
 
                 script src="/assets/js/highlight.min.js" {}
@@ -40,11 +41,11 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
 /// header template
 pub fn header() -> Markup {
     html! {
-        header class="container"{
+        header class="header"{
             div class="image" {
                 img class="banner" src="/assets/images/new_banner.svg" alt="Banner" {};
             }
-            div class="header-bar grid" {
+            div class="header-bar" {
                 h2 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
@@ -61,7 +62,7 @@ pub fn header() -> Markup {
 /// footer template
 pub fn footer() -> Markup {
     html! {
-        footer {
+        footer class="footer" {
             nav class="footer-navbar"{
                 ul {
                     li {a href="https://github.com/Lommix" alt="Github" target="_blank" {"[ Github ]"}}
@@ -76,13 +77,13 @@ pub fn footer() -> Markup {
 /// article preview
 pub fn article_preview(meta: &ArticleMeta) -> maud::Markup {
     html! {
-        div class="grid preview"{
+        div class="preview"{
             a href=(format!("/article/{}", meta.alias)) {
-                image width="630" src=(meta.cover);
+                image src=(meta.cover);
             };
-            div class="container"{
+            div {
                 a href=(format!("/article/{}", meta.alias)) {
-                    h1 { (meta.title) }
+                    h2 { (meta.title) }
                 }
                 p { (meta.teaser) };
             };

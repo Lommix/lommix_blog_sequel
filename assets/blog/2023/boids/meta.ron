@@ -1,8 +1,8 @@
 (
 	title : "Boids & Quadtrees",
 	alias : "QuadtreesInRust",
-	cover : "media/QuadtreesInRust/boid_screen.jpg",
+	cover : "media/QuadtreesInRust/cover.jpg",
 	tags : Some("rust"),
 	teaser : "Quadtrees are data structures for holding spatial information with a complexity of log(N) for collision detection. These are the foundation of every physics engine. They are also great for boid simulations. Here is an example running in Wasm.",
-	published : "12.08.2023",
+	published : "12.11.2023",
 )

@@ -1,6 +1,7 @@
 # Boids & Quadtrees
 
-Quadtrees are data structures for holding spatial information with a complexity of log(N) for collision detection. These are the foundation of every physics engine. They are also great for boid simulations. Here is an example running in Wasm.
+Quadtrees are data structures for holding spatial information with a complexity of log(N) for collision detection.
+These are the foundation of every physics engine. They are also great for boid simulations. Here is an example running in Web Assembly:
 
 
 <bevy-runner wasm-path="/media/QuadtreesInRust/boids-quadtree_bg.wasm.gz" canvas-id="boid-canvas" script-path="/media/QuadtreesInRust/boids-quadtree.js" height="800" style="background-color:black;">

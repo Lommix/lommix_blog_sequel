@@ -46,9 +46,6 @@ Here is the simple example from the [Evilreader website](https://evilreader.de/d
 The second part is the backend. A highly scalable API written in Rust that handles the generation, caching and streaming
 of audio files.
 
-The generational aspect is currently handled by an OpenAi integration, but the backend itself
-is API agnostic and can be replaced with any other text-to-speech API/Model.
-
 Later on, I want to make a service where if you give it some recordings of your voice, you can make your own models and use them with the app.
 
 Currently, I am looking for some companies that would be interested in working together on

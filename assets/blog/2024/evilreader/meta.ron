@@ -1,0 +1,8 @@
+(
+    title: "Launching Evilreader beta",
+    alias: "evilreader-beta",
+    cover: "media/evilreader-beta/cover.jpeg",
+    tags: Some("saas"),
+    teaser: "Releasing evilreader beta. An Ai based text-to-speech service that can be integrated into any website and comes with a simple audio player widget. Currently in beta for the german realm.",
+    published: "26.01.2024",
+)

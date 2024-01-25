@@ -1,9 +1,10 @@
 use crate::{files::ArticleMeta, pages::PageMeta};
-use maud::{html, Markup};
+use maud::{html, Markup, DOCTYPE};
 
 /// layout template
 pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
     html! {
+            (DOCTYPE)
             head {
                 meta charset="utf-8";
                 title { (meta.title) };
@@ -30,9 +31,7 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
 
                 script src="/assets/js/highlight.min.js" {}
                 script src="/assets/js/htmx.min.js"{}
-                script src="/assets/js/pako.min.js" {}
                 script src="/assets/main.js" type="module" {}
-
                 script {"hljs.highlightAll();"};
             }
     }

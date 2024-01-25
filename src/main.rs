@@ -35,7 +35,7 @@ async fn main() {
     let cmd = Command::parse();
     match cmd {
         Command::Serve => {
-            let addr = SocketAddr::from(([0, 0, 0, 0], http_port.clone()));
+            let addr = SocketAddr::from(([127, 0, 0, 1], http_port.clone()));
             tracing::info!("Starting server on {}", addr);
             axum::Server::bind(&addr)
                 .serve(setup_router().into_make_service())

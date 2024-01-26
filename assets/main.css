@@ -3,3 +3,21 @@
 @import url('css/header.css');
 @import url('css/content.css');
 @import url('css/footer.css');
+
+
+:root{
+	--primary-color: #020617;
+	--secondary-color: #1b2638;
+	--accent-color: #1f293b;
+	--font-color: #fff;
+	--link-color: #c2c2f2;
+}
+
+
+*,
+*::before,
+*::after{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}

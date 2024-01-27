@@ -1,15 +1,14 @@
+use std::borrow::Cow;
+use std::collections::HashMap;
 use std::path::PathBuf;
-use std::sync::Arc;
 
-use axum::extract::{Path, State};
-use axum::http::StatusCode;
-use axum::{body::StreamBody, http::Uri, response::IntoResponse};
+use pulldown_cmark::Event;
 use pulldown_cmark::Options;
 use pulldown_cmark::Parser;
+use pulldown_cmark::Tag;
 use serde::Deserialize;
 
 use crate::pages::PageMeta;
-use crate::AppState;
 
 const ALLOWED_EXTENSIONS: [&str; 12] = [
     "jpg", "jpeg", "svg", "gz", "png", "gif", "webm", "wasm", "js", "css", "html", "ico",
@@ -39,7 +38,7 @@ pub struct Article {
     pub source: PathBuf,
     pub dir: PathBuf,
     pub compiled: Option<String>,
-    pub files: Vec<PathBuf>,
+    pub files: HashMap<String, PathBuf>,
 }
 
 impl Article {
@@ -128,7 +127,8 @@ fn read_blog_path(path: PathBuf) -> anyhow::Result<Vec<Article>> {
                     }
                     _ => {
                         if ALLOWED_EXTENSIONS.contains(&extension) {
-                            article.files.push(path);
+                            let base_name = path.file_name().unwrap().to_str().unwrap().to_string();
+                            article.files.insert(base_name, path);
                         }
                     }
                 }
@@ -154,61 +154,4 @@ impl std::iter::Iterator for BlogFsIter {
     fn next(&mut self) -> Option<Self::Item> {
         self.files.pop()
     }
-}
-
-pub async fn static_files(uri: Uri) -> axum::response::Response {
-    let path = PathBuf::from(uri.path());
-
-    let file = match tokio::fs::File::open(&path.strip_prefix("/").unwrap()).await {
-        Ok(f) => f,
-        Err(_) => return (StatusCode::NOT_FOUND, "file does not exists").into_response(),
-    };
-
-    let content_type = match mime_guess::from_path(path).first_raw() {
-        Some(m) => m,
-        None => return (StatusCode::BAD_REQUEST, "type does not exists").into_response(),
-    };
-
-    let stream = tokio_util::io::ReaderStream::new(file);
-    let body = StreamBody::new(stream);
-    let headers = [(axum::http::header::CONTENT_TYPE, content_type)];
-
-    (headers, body).into_response()
-}
-
-pub async fn media(
-    Path((alias, file)): Path<(String, String)>,
-    State(state): State<Arc<AppState>>,
-) -> axum::response::Response {
-    match state.articles.find_by_alias(&alias) {
-        Some(article) => {
-            for path in &article.files {
-                let file_name = path.file_name().unwrap().to_str().unwrap();
-                if file_name == file {
-                    let file = match tokio::fs::File::open(path).await {
-                        Ok(f) => f,
-                        Err(_) => {
-                            return (StatusCode::NOT_FOUND, "file does not exists").into_response()
-                        }
-                    };
-
-                    let content_type = match mime_guess::from_path(path).first_raw() {
-                        Some(m) => m,
-                        None => {
-                            return (StatusCode::BAD_REQUEST, "type does not exists")
-                                .into_response()
-                        }
-                    };
-
-                    let stream = tokio_util::io::ReaderStream::new(file);
-                    let body = StreamBody::new(stream);
-                    let headers = [(axum::http::header::CONTENT_TYPE, content_type)];
-
-                    return (headers, body).into_response();
-                }
-            }
-        }
-        None => (),
-    }
-    (StatusCode::NOT_FOUND, "Not Found").into_response()
 }

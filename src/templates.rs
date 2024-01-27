@@ -2,7 +2,7 @@ use crate::{files::ArticleMeta, pages::PageMeta};
 use maud::{html, Markup, DOCTYPE};
 
 /// layout template
-pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
+pub fn base(meta: &PageMeta, content: &Markup, css: Option<Markup>, js: Option<Markup>) -> Markup {
     html! {
             (DOCTYPE)
             head {
@@ -10,11 +10,16 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
                 title { (meta.title) };
                 link rel="stylesheet" href="/assets/main.css";
 
+                @if let Some(css) = css {
+                    (css)
+                }
+
                 // meta
                 meta name="title" content=(meta.title);
                 meta name="author" content="lommix";
                 meta name="description" content=(meta.description);
                 meta name="keywords" content=(meta.keywords);
+                meta name="viewport" content="width=device-width, initial-scale=1.0";
 
                 @if let Some(image) = &meta.image {
                     meta property="og:image" content=(format!("https://lommix.de/{}", image));
@@ -29,11 +34,14 @@ pub fn base(meta: &PageMeta, content: &Markup) -> Markup {
                 main {(content)}
                 (footer())
 
-                script src="/assets/js/pako.min.js" {}
                 script src="/assets/js/highlight.min.js" {}
                 script src="/assets/js/htmx.min.js"{}
                 script src="/assets/main.js" type="module" {}
                 script {"hljs.highlightAll();"};
+
+                @if let Some(js) = js {
+                    (js)
+                }
             }
     }
 }

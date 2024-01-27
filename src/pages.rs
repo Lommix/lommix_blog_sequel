@@ -17,7 +17,7 @@ pub struct PageMeta {
     pub image: Option<String>,
 }
 
-pub async fn home(State(state): State<Arc<AppState>>) -> Response {
+pub async fn home(State(state): State<AppState>) -> Response {
     let articles = state
         .articles
         .iter()
@@ -36,6 +36,8 @@ pub async fn home(State(state): State<Arc<AppState>>) -> Response {
                 (article)
             }
         ),
+        None,
+        None,
     )
     .into_response()
 }
@@ -52,11 +54,13 @@ pub async fn about() -> Response {
             image: None,
         },
         &html!((PreEscaped(&content))),
+        None,
+        None,
     )
     .into_response()
 }
 
-pub async fn article(Path(alias): Path<String>, State(state): State<Arc<AppState>>) -> Response {
+pub async fn article(Path(alias): Path<String>, State(state): State<AppState>) -> Response {
     let mut article = match state.articles.find_by_alias(&alias) {
         Some(a) => a.clone(),
         None => return (StatusCode::NOT_FOUND, "Not Found").into_response(),
@@ -76,5 +80,5 @@ pub async fn article(Path(alias): Path<String>, State(state): State<Arc<AppState
         }
     };
 
-    templates::base(&article.meta.clone().into(), &content).into_response()
+    templates::base(&article.meta.clone().into(), &content, None, None).into_response()
 }

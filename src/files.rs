@@ -1,11 +1,8 @@
-use std::borrow::Cow;
 use std::collections::HashMap;
 use std::path::PathBuf;
 
-use pulldown_cmark::Event;
 use pulldown_cmark::Options;
 use pulldown_cmark::Parser;
-use pulldown_cmark::Tag;
 use serde::Deserialize;
 
 use crate::pages::PageMeta;

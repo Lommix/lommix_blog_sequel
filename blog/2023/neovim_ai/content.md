@@ -1,13 +1,21 @@
 # How to add a full team of private specialists to Neovim. Local AI on steroids.
 
+
 Imagine being able to have a full team of specialists at your fingertips wherever you go, with 100% private, uncensored, and predefined models tailored to your specific needs.
 No need to dream anymore - modern FOSS models make this a reality! Let's implement them into your Neovim workflow. It's easier than you think.
 
-<div style="height: 250px; overflow:hidden;">
+<div style="height: 250px; overflow:hidden; margin: 1rem 0;">
     <video height="600" width="800" autoplay loop>
       <source src="/media/ai_on_steriods/grug_ai.webm" type="video/webm">
     </video>
 </div>
+
+### [Easy to use Plugin?](https://github.com/Lommix/ollamachad.nvim)
+
+This is a tutorial on how to do it yourself, but I also have an easy-to-use plugin on my Github.
+Checkout **[Ollamachad.nvim](https://github.com/Lommix/ollamachad.nvim)**
+
+It uses the same principles as this tutorial, but it's a bit more polished and has a few more features.
 
 ### Disclaimer
 
@@ -15,9 +23,6 @@ Before we start let me give a piece of advice. This is personal opinion, so take
 LLVMs are tools. Tools are only as good as the one using it. Ai will not replace programmers any time soon.
 They are incredibly useful, if used correctly. But they can also do great harm. Do not let AI write any code other than boilerplate.
 They create bugs like any other programmer. They are trained on the average and that's exactly what you get.
-
-This is a tutorial and not Plugin. If you have never tried to expand your Neovim workspace before, you are missing out on the best part.
-I highly encourage you to go out and play. Lua and the Neovim api is very easy to learn, and the benefit is huge.
 
 ### Where will our Models come from?
 

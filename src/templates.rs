@@ -8,7 +8,7 @@ pub fn base(meta: &PageMeta, content: &Markup, css: Option<Markup>, js: Option<M
             head {
                 meta charset="utf-8";
                 title { (meta.title) };
-                link rel="stylesheet" href="/assets/main.css";
+                link rel="stylesheet" href="/static/main.css";
 
                 @if let Some(css) = css {
                     (css)
@@ -34,9 +34,10 @@ pub fn base(meta: &PageMeta, content: &Markup, css: Option<Markup>, js: Option<M
                 main {(content)}
                 (footer())
 
-                script src="/assets/js/highlight.min.js" {}
-                script src="/assets/js/htmx.min.js"{}
-                script src="/assets/main.js" type="module" {}
+                script src="/static/js/wasm_frame.js" type="module"{}
+                script src="/static/js/highlight.min.js" {}
+                script src="/static/js/htmx.min.js"{}
+                script src="/static/main.js" type="module" {}
                 script {"hljs.highlightAll();"};
 
                 @if let Some(js) = js {
@@ -51,13 +52,14 @@ pub fn header() -> Markup {
     html! {
         header class="header"{
             div class="image" {
-                img class="banner" src="/assets/images/new_banner.svg" alt="Banner" {};
+                img class="banner" src="/static/images/new_banner.svg" alt="Banner" {};
             }
             div class="header-bar" {
                 h2 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
                         li { a href="/" { "[ Home ]" } }
+                        li { a href="/blog" { "[ Blog ]" } }
                         li { a href="/about" { "[ About ]" } }
                     }
                 }

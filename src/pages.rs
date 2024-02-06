@@ -20,6 +20,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
         .articles
         .iter()
         .map(|article| templates::article_preview(&article.meta))
+        .take(3)
         .collect::<Vec<_>>();
 
     templates::base(
@@ -27,9 +28,30 @@ pub async fn home(State(state): State<AppState>) -> Response {
             title: "Lommix's Blog".into(),
             description: "Gamedev, web wizardry & educational content".into(),
             keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
-            image: Some("assets/images/new_banner.svg".into()),
+            image: Some("static/images/new_banner.svg".into()),
         },
         &html!(
+
+            div class="markdown" {
+                h1 { "Welcome to my blog!" }
+                p {"I am working on a game called Panzatier. It's a Top-Down Roguelike with tanks. I set up a CI Pipline to automatically deploy my current development progress to this blog using Web Assembly:"}
+                wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
+            }
+
+            div {
+                p {"It is still in early development and I am working on it in my free time. I am always looking for feedback and suggestions. If you have any, leave me a message!"}
+                div class="feedback"{
+                    form action="/feedback" method="post" {
+                        textarea rows="4" cols="50" {}
+                        input type="hidden" name="csrf" value="123" {}
+                        input type="submit" value="Submit" {}
+                    }
+                }
+            }
+
+
+            h2 { "Recent Articles" }
+
             @for article in articles {
                 (article)
             }
@@ -41,7 +63,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
 }
 
 pub async fn about() -> Response {
-    let content = super::files::read_markdown("assets/content/about.md".into())
+    let content = super::files::read_markdown("static/content/about.md".into())
         .await
         .unwrap();
     templates::base(
@@ -52,6 +74,33 @@ pub async fn about() -> Response {
             image: None,
         },
         &html!((PreEscaped(&content))),
+        None,
+        None,
+    )
+    .into_response()
+}
+
+pub async fn blog(State(state): State<AppState>) -> Response {
+    let articles = state
+        .articles
+        .iter()
+        .map(|article| templates::article_preview(&article.meta))
+        .collect::<Vec<_>>();
+
+    templates::base(
+        &PageMeta {
+            title: "Blog".into(),
+            description: "Explore the intersection of game development and web development on my blog, featuring in-depth discussions and tutorials on cutting-edge technologies like Rust and Go. Enhance your coding experience with tips and tricks for Neovim, Ai, Game and Webdev.".into(),
+            keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
+            image: None,
+        },
+        &html!(
+            h1 {"Follow my recent development adventures on my Blog!"}
+            hr {}
+            @for article in articles {
+                (article)
+            }
+        ),
         None,
         None,
     )

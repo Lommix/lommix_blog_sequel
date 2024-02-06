@@ -7,6 +7,6 @@ I am driven by curiosity and a desire to continuously learn and explore new idea
 My interests lie in the field of system design, experimentation, and improving upon existing technologies through constant exploration and seeking out new ways of doing things.
 
 
-![pcb](/assets/images/mcu.jpg)
+![pcb](/static/images/mcu.jpg)
 
 (*Dram Crystal Display Driver, AVR-Programming adapter*)

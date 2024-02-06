@@ -1,9 +1,6 @@
 use axum::{
     extract::{Path, State},
-    http::{
-        header::CONTENT_TYPE,
-        StatusCode,
-    },
+    http::{header::CONTENT_TYPE, StatusCode},
     response::{IntoResponse, Response},
     routing::get,
     Router,
@@ -47,17 +44,19 @@ async fn main() {
             let state = AppState {
                 debug: true,
                 articles: Arc::new(
-                    Articles::from_dir("assets/blog".into()).expect("Failed to load articles"),
+                    Articles::from_dir("blog".into()).expect("Failed to load articles"),
                 ),
             };
 
             let router = Router::new()
                 .route("/", get(pages::home))
                 .route("/about", get(pages::about))
+                .route("/blog", get(pages::blog))
                 .route("/article/:alias", get(pages::article))
                 .route("/media/:alias/:file", get(serve_article_media))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
-                .nest_service("/assets", ServeDir::new("assets"))
+                .nest_service("/static", ServeDir::new("static"))
+                .nest_service("/wasm", ServeDir::new("wasm").precompressed_gzip())
                 .layer(tower_http::trace::TraceLayer::new_for_http())
                 .with_state(state);
 

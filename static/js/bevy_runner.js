@@ -60,7 +60,7 @@ class BevyRunner extends HTMLElement {
 
         const script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "/assets/js/pako.min.js";
+        script.src = "/static/js/pako.min.js";
         document.body.appendChild(script);
 
         this.appendChild(this.loadingScreen);

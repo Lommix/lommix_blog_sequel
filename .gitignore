@@ -1,4 +1,5 @@
 /target
+/feedback/*
 /wasm/*
 *.pem
 *.key

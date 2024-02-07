@@ -11,8 +11,43 @@
 	--accent-color: #1f293b;
 	--font-color: #fff;
 	--link-color: #c2c2f2;
-}
 
+	--clr-primary: #020617;
+	--clr-secondary: #1b2638;
+	--clr-accent: #1f293b;
+
+	--fs-clr-primary: #fff;
+	--fs-clr-secondary: #c2c2f2;
+
+	--vp-desktop: 1000px;
+	--vp-tablet: 768px;
+	--vp-mobile: 500px;
+
+	--fs-4xl: 2.5rem;
+	--fs-3xl: 2rem;
+	--fs-2xl: 1.5rem;
+	--fs-xl: 1.25rem;
+	--fs-lg: 1.5rem;
+	--fs-md: 1.25rem;
+
+	@media screen and (max-width: var(--vp-tablet)) {
+		--fs-4xl: 2rem;
+		--fs-3xl: 1.75rem;
+		--fs-2xl: 1.25rem;
+		--fs-xl: 1.25rem;
+		--fs-lg: 1.5rem;
+		--fs-md: 1.25rem;
+	}
+
+	@media screen and (max-width: var(--vp-mobile)) {
+		--fs-4xl: 1.75rem;
+		--fs-3xl: 1.5rem;
+		--fs-2xl: 1.25rem;
+		--fs-xl:  1rem;
+		--fs-lg:  1rem;
+		--fs-md:  1rem;
+	}
+}
 
 *,
 *::before,

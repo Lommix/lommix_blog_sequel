@@ -58,9 +58,9 @@ pub fn header() -> Markup {
                 h2 class="logo" { a href="/" {"[ Lommix's Blog ]"} }
                 nav class="navbar"{
                     ul {
-                        li { a href="/" { "[ Home ]" } }
-                        li { a href="/blog" { "[ Blog ]" } }
-                        li { a href="/about" { "[ About ]" } }
+                        li { a href="/" { "[ Home ]" } };
+                        li { a href="/blog" { "[ Blog ]" } };
+                        li { a href="/about" { "[ About ]" } };
                     }
                 }
             }

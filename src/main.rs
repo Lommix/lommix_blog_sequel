@@ -2,7 +2,7 @@ use axum::{
     extract::{Path, State},
     http::{header::CONTENT_TYPE, StatusCode},
     response::{IntoResponse, Response},
-    routing::get,
+    routing::{get, post},
     Router,
 };
 use clap::Parser;
@@ -15,6 +15,7 @@ use tower_http::services::{ServeDir, ServeFile};
 mod files;
 mod pages;
 mod templates;
+mod forms;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
@@ -54,6 +55,7 @@ async fn main() {
                 .route("/blog", get(pages::blog))
                 .route("/article/:alias", get(pages::article))
                 .route("/media/:alias/:file", get(serve_article_media))
+                .route("/feedback", post(forms::feedback_form))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
                 .nest_service("/static", ServeDir::new("static"))
                 .nest_service("/wasm", ServeDir::new("wasm").precompressed_gzip())

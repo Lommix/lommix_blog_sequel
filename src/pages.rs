@@ -26,31 +26,34 @@ pub async fn home(State(state): State<AppState>) -> Response {
     templates::base(
         &PageMeta {
             title: "Lommix's Blog".into(),
-            description: "Gamedev, web wizardry & educational content".into(),
+            description:"Discover the creative world of Lommix, a dedicated web and game developer. Immerse yourself in his interactive games and gain valuable insights through informative articles on various aspects of development. Explore now on Lommix's Blog – your go-to hub for development knowledge and entertainment.".into(),
             keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
             image: Some("static/images/new_banner.svg".into()),
         },
         &html!(
+            h1 { "Welcome to my blog!" }
 
-            div class="markdown" {
-                h1 { "Welcome to my blog!" }
-                p {"I am working on a game called Panzatier. It's a Top-Down Roguelike with tanks. I set up a CI Pipline to automatically deploy my current development progress to this blog using Web Assembly:"}
-                wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
-            }
+            hr {};
+
+            p {"I am currently working on a game called Panzatier.
+                It's a Top-Down Roguelike with tanks written in Rust using the Bevy Engine.
+                I set up a CI Pipline to automatically deploy my current development progress
+                to this blog using Web Assembly:"}
+
+            wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
                 p {"It is still in early development and I am working on it in my free time. I am always looking for feedback and suggestions. If you have any, leave me a message!"}
-                div class="feedback"{
-                    form action="/feedback" method="post" {
-                        textarea rows="4" cols="50" {}
-                        input type="hidden" name="csrf" value="123" {}
-                        input type="submit" value="Submit" {}
-                    }
+                form class="feedback" action="/feedback" method="post" {
+                    textarea name="message" rows="4" cols="50" {}
+                    input class="captcha" type="text" name="captcha" value="" {}
+                    input type="hidden" name="csrf" value="" {}
+                    input type="submit" value="Submit" {}
                 }
             }
 
-
             h2 { "Recent Articles" }
+            hr {}
 
             @for article in articles {
                 (article)
@@ -95,7 +98,7 @@ pub async fn blog(State(state): State<AppState>) -> Response {
             image: None,
         },
         &html!(
-            h1 {"Follow my recent development adventures on my Blog!"}
+            h1 {"Follow my recent development adventures"}
             hr {}
             @for article in articles {
                 (article)

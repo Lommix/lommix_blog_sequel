@@ -28,23 +28,20 @@ header{
 		margin-top: 0.5rem;
 		display: flex;
 		justify-content: space-between;
-		.logo {
-			padding: 0;
-			margin: 0;
-		}
 		.navbar {
 			display: flex;
 			justify-content: start;
 			font-weight: bold;
 		}
 	}
-	padding: 0;
-	margin: 0;
 }
 
-.logo a {
-	font-size: 2.5rem;
-	line-height: 3rem;
+.logo {
+	padding: 0;
+	a{
+		font-size: 2.5rem;
+		line-height: 3rem;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -63,11 +60,9 @@ header{
 }
 
 header ul {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	display: flex;
+	flex-direction: row;
 	gap: 1rem;
-	padding: 0;
-	margin: 0;
 }
 
 header p {

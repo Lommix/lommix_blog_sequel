@@ -43,6 +43,7 @@ class WasmFrame extends HTMLElement {
 				background: greenyellow;
 			}
 			#fullscreen-button{
+				display: none;
 				z-index: 100;
 				position: absolute;
 				right: 0.5rem;
@@ -80,6 +81,7 @@ class WasmFrame extends HTMLElement {
         this.shadowRoot.getElementById("wasm-frame").style.display = "block";
         const wasmFrame = this.shadowRoot.getElementById("wasm-frame");
         wasmFrame.src = this.getAttribute("src");
+        this.shadowRoot.getElementById("fullscreen-button").style.display = "block";
     };
 
     fullscreen = () => {

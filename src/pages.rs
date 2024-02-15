@@ -40,11 +40,16 @@ pub async fn home(State(state): State<AppState>) -> Response {
                 I set up a CI Pipline to automatically deploy my current development progress
                 to this blog using Web Assembly:"}
 
+
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
                 p {"Move with WASD, zoom with the mouse wheel."}
+
                 p {"It's still at the beginning stages, really just a basic example, and I'm working on it when I have spare time. WebGL has its limits and some things like particels and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
+
+                p{"If you want to see more, checkout my devlogs on youtube! " a target="_blank" href="https://www.youtube.com/watch?v=bvf0Nm2idyQ" {"My latest video"}}
+
                 form class="feedback" action="/feedback" method="post" {
                     textarea name="message" rows="4" cols="50" {}
                     input class="captcha" type="text" name="captcha" value="" {}

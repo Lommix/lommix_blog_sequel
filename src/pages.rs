@@ -43,7 +43,8 @@ pub async fn home(State(state): State<AppState>) -> Response {
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
-                p {"It is still in very early development, actually more of a tech demo and I am working on it in my free time. I am always looking for feedback and suggestions. If you have any, leave me a message!"}
+                p {"Move with WASD, zoom with the mouse wheel."}
+                p {"It's still at the beginning stages, really just a basic example, and I'm working on it when I have spare time. WebGL has its limits and some things like particels and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
                 form class="feedback" action="/feedback" method="post" {
                     textarea name="message" rows="4" cols="50" {}
                     input class="captcha" type="text" name="captcha" value="" {}

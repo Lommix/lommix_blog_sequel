@@ -43,7 +43,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
-                p {"It is still in early development and I am working on it in my free time. I am always looking for feedback and suggestions. If you have any, leave me a message!"}
+                p {"It is still in very early development, actually more of a tech demo and I am working on it in my free time. I am always looking for feedback and suggestions. If you have any, leave me a message!"}
                 form class="feedback" action="/feedback" method="post" {
                     textarea name="message" rows="4" cols="50" {}
                     input class="captcha" type="text" name="captcha" value="" {}

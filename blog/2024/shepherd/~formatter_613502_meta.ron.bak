@@ -1,0 +1,8 @@
+(
+    title: "Bevy Game Jam #4",
+    alias: "sheperd",
+    cover: "media/shepherd/screen.jpeg",
+    tags: Some("bevy"),
+    teaser: "My entry for the Bevy Game Jam #4",
+    published: "12.02.2024",
+)

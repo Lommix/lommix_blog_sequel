@@ -145,6 +145,12 @@ code{
 	border-radius: 0.3rem;
 }
 
+.error{
+	color : red;
+	font-size: var(--fs-md);
+	font-style: italic;
+}
+
 
 a:hover{
 	color: #8fb1dc; /* Set the underline color */

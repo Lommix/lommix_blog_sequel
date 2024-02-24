@@ -74,6 +74,10 @@ class WasmFrame extends HTMLElement {
         this.shadowRoot.getElementById("load-button").onclick = () => this.play();
         this.shadowRoot.getElementById("fullscreen-button").onclick = () => this.fullscreen();
         this.shadowRoot.getElementById("wasm-cover").src = this.getAttribute("cover");
+
+        if (this.getAttribute("fullscreen")){
+		}
+
     }
 
     play = () => {
@@ -81,7 +85,10 @@ class WasmFrame extends HTMLElement {
         this.shadowRoot.getElementById("wasm-frame").style.display = "block";
         const wasmFrame = this.shadowRoot.getElementById("wasm-frame");
         wasmFrame.src = this.getAttribute("src");
-        this.shadowRoot.getElementById("fullscreen-button").style.display = "block";
+
+        if (this.getAttribute("fullscreen")){
+			this.shadowRoot.getElementById("fullscreen-button").style.display = "block";
+		}
     };
 
     fullscreen = () => {

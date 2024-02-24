@@ -1,6 +1,10 @@
 use axum::{
-    extract::{Path, State},
-    http::{header::CONTENT_TYPE, StatusCode},
+    extract::{Path, Request, State},
+    http::{
+        header::{self, CONTENT_TYPE},
+        StatusCode,
+    },
+    middleware::Next,
     response::{IntoResponse, Response},
     routing::{get, post},
     Router,
@@ -13,9 +17,9 @@ use tokio::net::TcpListener;
 use tower_http::services::{ServeDir, ServeFile};
 
 mod files;
+mod forms;
 mod pages;
 mod templates;
-mod forms;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
@@ -49,6 +53,10 @@ async fn main() {
                 ),
             };
 
+            let serve_router = Router::new()
+                .nest_service("/", ServeDir::new("wasm").precompressed_gzip())
+                .layer(axum::middleware::from_fn(no_cache_middle));
+
             let router = Router::new()
                 .route("/", get(pages::home))
                 .route("/about", get(pages::about))
@@ -58,7 +66,7 @@ async fn main() {
                 .route("/feedback", post(forms::feedback_form))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
                 .nest_service("/static", ServeDir::new("static"))
-                .nest_service("/wasm", ServeDir::new("wasm").precompressed_gzip())
+                .nest_service("/wasm", serve_router.into_service())
                 .layer(tower_http::trace::TraceLayer::new_for_http())
                 .with_state(state);
 
@@ -69,6 +77,14 @@ async fn main() {
             axum::serve(listener, router).await.unwrap();
         }
     };
+}
+
+async fn no_cache_middle(request: Request, next: Next) -> Response {
+    let mut response = next.run(request).await;
+    response
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, "no-cache".parse().unwrap());
+    response
 }
 
 pub enum ErrorResponse {

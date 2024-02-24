@@ -44,7 +44,11 @@ pub async fn home(State(state): State<AppState>) -> Response {
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
-                p {"Move with WASD, zoom with the mouse wheel."}
+                p class="error" {"A dependency bug currently causes significant issues during canvas resizing while in operation and most custom shaders broke in the new Bevy 0.13 release for webgl. Expecting a fix soon."}
+
+                h3 {"Controls:"}
+
+                p {"[ WASD ] : Move [ MouseWheel ]: ZOOM [ Hold Space ]: drift [ Shift ]: Dash"}
 
                 p {"It's still at the beginning stages, really just a basic example, and I'm working on it when I have spare time. WebGL has its limits and some things like particels and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
 

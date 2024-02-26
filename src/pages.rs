@@ -31,26 +31,26 @@ pub async fn home(State(state): State<AppState>) -> Response {
             image: Some("static/images/new_banner.svg".into()),
         },
         &html!(
-            h1 { "Welcome to my blog!" }
+            h1 { "Welcome! Develop with me!" }
 
             hr {};
 
-            p {"I am currently working on a game called Panzatier.
-                It's a Top-Down Roguelike with tanks written in Rust using the Bevy Engine.
-                I set up a CI Pipline to automatically deploy my current development progress
-                to this blog using Web Assembly:"}
-
+            p {"I am building a game called Panzatier.
+                It's a Top-Down sci-fi Roguelike written in Rust using the Bevy Engine.
+                I have set up a CI Pipline to automatically deploy my current development progress
+                to this blog using Web Assembly. It is very raw and sometimes may be broken,
+                depending on what I am currently working on."}
 
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
-                p class="error" {"A dependency bug currently causes significant issues during canvas resizing while in operation and most custom shaders broke in the new Bevy 0.13 release for webgl. Expecting a fix soon."}
+                p class="error" {"The new Bevy 0.13 update broke wasm exports and most custom shaders for webassembly. Frames may drop pretty hard. Expecting a fix soon."}
 
                 h3 {"Controls:"}
 
                 p {"[ WASD ] : Move [ MouseWheel ]: ZOOM [ Hold Space ]: drift [ Shift ]: Dash"}
 
-                p {"It's still at the beginning stages, really just a basic example, and I'm working on it when I have spare time. WebGL has its limits and some things like particels and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
+                p {"It's still at the beginning stages and I'm working on it when I have spare time. WebGL has its limits and some things like particles and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
 
                 p{"If you want to see more, checkout my devlogs on youtube! " a target="_blank" href="https://www.youtube.com/watch?v=bvf0Nm2idyQ" {"My latest video"}}
 

@@ -44,7 +44,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
 
             div {
-                p class="error" {"The new Bevy 0.13 update broke wasm exports and most custom shaders for webassembly, especially for Firefox Users. Game freezes on unfocus. Expecting a fix soon."}
+                p class="error" {"The new Bevy 0.13 update broke most custom shaders for webassembly. So no shadows and lights for now. Expecting a fix soon."}
 
                 h3 {"Controls:"}
 

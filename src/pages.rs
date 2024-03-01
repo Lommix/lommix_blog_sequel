@@ -41,7 +41,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
                 to this blog using Web Assembly. It is very raw and sometimes may be broken,
                 depending on what I am currently working on."}
 
-            wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" {}
+            wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" fullscreen="true" {}
 
             div {
                 p class="error" {"The new Bevy 0.13 update broke most custom shaders for webassembly. So no shadows and lights for now. Expecting a fix soon."}

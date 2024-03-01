@@ -76,6 +76,7 @@ class WasmFrame extends HTMLElement {
         this.shadowRoot.getElementById("wasm-cover").src = this.getAttribute("cover");
 
         if (this.getAttribute("fullscreen")){
+			this.shadowRoot.getElementById("fullscreen-button").style.display = block;
 		}
 
     }

@@ -26,7 +26,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
     templates::base(
         &PageMeta {
             title: "Lommix's Blog".into(),
-            description:"Discover the creative world of Lommix, a dedicated web and game developer. Immerse yourself in his interactive games and gain valuable insights through informative articles on various aspects of development. Explore now on Lommix's Blog – your go-to hub for development knowledge and entertainment.".into(),
+            description:"Discover the creative world of Lommix, a dedicated web and game developer. Immerse yourself in his interactive games and gain valuable insights through informative articles on various aspects of development.".into(),
             keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
             image: Some("static/images/new_banner.svg".into()),
         },

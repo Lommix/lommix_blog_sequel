@@ -36,10 +36,10 @@ pub async fn inc(pool: &Pool<rusqlite::Connection>, page: &str) -> anyhow::Resul
 
     let mut stmt = con.prepare(
         r#"
-INSERT INTO clicks (page, count, date)
-VALUES (?1, 1, ?2)
-ON CONFLICT(page, date) DO UPDATE SET count = count + 1;
-"#,
+        INSERT INTO clicks (page, count, date)
+        VALUES (?1, 1, ?2)
+        ON CONFLICT(page, date) DO UPDATE SET count = count + 1;
+        "#,
     )?;
 
     let now = time::OffsetDateTime::now_utc()
@@ -62,6 +62,11 @@ pub struct Stats {
 
 fn pad(input: &str, min_length: usize) -> String {
     let mut output = String::from(input);
+
+    if output.len() > min_length {
+        return output.split_off(min_length);
+    }
+
     while output.len() < min_length {
         output.push(' ');
     }

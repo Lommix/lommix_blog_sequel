@@ -78,7 +78,7 @@ async fn main() -> anyhow::Result<()> {
                 .route("/media/:alias/:file", get(serve_article_media))
                 .route("/feedback", post(forms::feedback_form))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
-                .nest_service("/static", ServeDir::new("static"))
+                .nest_service("/static", ServeDir::new("static").precompressed_gzip())
                 .nest_service("/wasm", serve_router.into_service())
                 .layer(tower_http::trace::TraceLayer::new_for_http())
                 .with_state(state.clone());

@@ -159,3 +159,8 @@ a:hover{
 a:hover h2{
 	color: #8fb1dc; /* Set the underline color */
 }
+
+
+.control-info{
+	margin-top: 1rem;
+}

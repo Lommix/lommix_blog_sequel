@@ -43,16 +43,19 @@ pub async fn home(State(state): State<AppState>) -> Response {
 
             wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" fullscreen="true" {}
 
-            div {
-                p class="error" {"The new Bevy 0.13 update broke most custom shaders for webassembly. So no shadows and lights for now. Expecting a fix soon."}
+            div class="control-info" {
+                h3 {"Keybinds:"}
 
-                h3 {"Controls:"}
-
-                p {"[ WASD ] : Move [ MouseWheel ]: ZOOM [ Hold Space ]: drift [ Shift ]: Dash"}
+                ul{
+                    li{"WASD: move"}
+                    li{"MOUSEWHEEL: zoom"}
+                    li{"HOLD SPACE: drift"}
+                    li{"Q: bomb"}
+                }
 
                 p {"It's still at the beginning stages and I'm working on it when I have spare time. WebGL has its limits and some things like particles and compute shaders don't work in the browser. So this is a simpler version of the game. If you have any thoughts or ideas, drop me a note!"}
 
-                p{"If you want to see more, checkout my devlogs on youtube! " a target="_blank" href="https://www.youtube.com/watch?v=bvf0Nm2idyQ" {"My latest video"}}
+                p{"If you want to see more, checkout my devlogs on youtube! " a target="_blank" href="https://www.youtube.com/watch?v=0csQQaFwD1A" {"My latest video"}}
 
                 form class="feedback" action="/feedback" method="post" {
                     textarea name="message" rows="4" cols="50" {}

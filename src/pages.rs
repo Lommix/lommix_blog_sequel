@@ -41,7 +41,7 @@ pub async fn home(State(state): State<AppState>) -> Response {
                 to this blog using Web Assembly. It is very raw and sometimes may be broken,
                 depending on what I am currently working on."}
 
-            wasm-frame cover="wasm/panzatier/cover.png" src="wasm/panzatier/index.html" fullscreen="true" {}
+            wasm-frame cover="wasm/panzatier/cover.jpeg" src="wasm/panzatier/index.html" fullscreen="true" {}
 
             div class="control-info" {
                 h3 {"Keybinds:"}

@@ -20,7 +20,6 @@ use tower_http::services::{ServeDir, ServeFile};
 
 mod db;
 mod files;
-mod forms;
 mod htmx;
 mod pages;
 mod templates;
@@ -96,7 +95,6 @@ async fn main() -> anyhow::Result<()> {
                 .route("/*page", get(pages::home))
                 .nest("/htmx", htmx::htmx_router())
                 .route("/media/:alias/:file", get(serve_article_media))
-                .route("/feedback", post(forms::feedback_form))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
                 .nest_service("/static", ServeDir::new("static").precompressed_gzip())
                 .nest_service("/wasm", serve_router.into_service())

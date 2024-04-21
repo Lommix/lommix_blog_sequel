@@ -87,7 +87,7 @@ impl Into<PageMeta> for ArticleMeta {
             title: self.title,
             description: self.teaser,
             keywords: self.tags.unwrap_or("".into()),
-            image: Some(format!("https:/lommix.com/{}", self.cover)),
+            image: Some(self.cover),
         }
     }
 }

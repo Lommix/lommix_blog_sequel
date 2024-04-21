@@ -5,19 +5,15 @@ pub fn base(meta: &Markup, content: &Markup) -> Markup {
     html! {
             (DOCTYPE)
             head {
-                meta charset="utf-8";
                 link rel="stylesheet" href="/static/main.css";
                 link rel="stylesheet" href="/htmx/style.css" {}
 
+                (meta)
+
+                meta charset="utf-8";
                 meta name="author" content="lommix";
                 meta name="viewport" content="width=device-width, initial-scale=1.0";
 
-                ((meta))
-                // @if let Some(image) = &meta.image {
-                //     meta property="og:image" content=(format!("https://lommix.com/{}", image));
-                // }
-                // meta name="og:title" content=(meta.title);
-                // meta name="og:description" content=(meta.description);
             }
             body {
 

@@ -17,12 +17,6 @@ pub struct PageMeta {
 
 pub async fn home(page: Option<Path<String>>, State(state): State<AppState>) -> Response {
     templates::base(
-        // &PageMeta {
-        //     title: "Lommix's Blog".into(),
-        //     description:"Join me on my game development adventure through my personal blog, where I delve into the world of Rust, Bevy, and the Terminal!".into(),
-        //     keywords: "Gamedev, Webdev, Rust, Go, Neovim".into(),
-        //     image: Some("static/images/new_banner.svg".into()),
-        // },
         &meta_builder(page.as_ref().map(|p| p.as_str()), &state),
         &html!(
             @match page {
@@ -71,6 +65,9 @@ fn meta_builder(page: Option<&str>, state: &AppState) -> Markup {
         @if let Some(image) = &meta.image {
             meta property="og:image" content=(format!("https://lommix.com/{}", image));
         }
+
+        title {( meta.title )}
+
         meta name="title" content=(meta.title);
         meta name="og:title" content=(meta.title);
         meta name="description" content=(meta.description);

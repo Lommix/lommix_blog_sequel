@@ -1,7 +1,6 @@
 use super::HtmxComponent;
-use crate::{db, AppState};
+use crate::AppState;
 use axum::{
-    extract::State,
     response::IntoResponse,
     routing::{get, MethodRouter},
 };
@@ -19,8 +18,7 @@ impl HtmxComponent<AppState> for AboutContent {
     }
 
     fn handle() -> MethodRouter<AppState> {
-        get(|State(state): State<AppState>| async move {
-            _ = db::inc(&state.db_pool, "about").await;
+        get(|| async move {
             html!{
                 h1{"About"}
                 hr {}

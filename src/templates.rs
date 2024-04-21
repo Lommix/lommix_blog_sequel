@@ -5,7 +5,7 @@ pub fn base(meta: &Markup, content: &Markup) -> Markup {
     html! {
             (DOCTYPE)
             head {
-                link rel="stylesheet" href="/static/main.css";
+                link rel="stylesheet" href="/static/main42.css";
                 link rel="stylesheet" href="/htmx/style.css" {}
 
                 (meta)
@@ -41,10 +41,10 @@ pub fn header() -> Markup {
             div class="header-bar" {
                 h2 class="logo" { "Lommix's Blog" }
                 nav hx-target="#main" class="nav"{
-                    a class="nav-link" hx-get="/htmx/home" hx-push-url="/" { "Home" }
-                    a class="nav-link" hx-get="/htmx/blog" hx-push-url="/blog" { "Blog" }
-                    a class="nav-link" hx-get="/htmx/contact" hx-push-url="/contact" { "Contact" }
-                    a class="nav-link" hx-get="/htmx/about" hx-push-url="/about" { "About" }
+                    a class="nav-link" track="home" hx-get="/htmx/home" hx-push-url="/" { "Home" }
+                    a class="nav-link" track="blog" hx-get="/htmx/blog" hx-push-url="/blog" { "Blog" }
+                    a class="nav-link" track="contact" hx-get="/htmx/contact" hx-push-url="/contact" { "Contact" }
+                    a class="nav-link" track="about" hx-get="/htmx/about" hx-push-url="/about" { "About" }
                 }
             }
             p {"Gamedev, web wizardry & educational content"}
@@ -56,9 +56,7 @@ pub fn header() -> Markup {
 pub fn footer() -> Markup {
     html! {
         footer class="footer" {
-
-
-            a class="branding" href="https://github.com/Lommix/lommix_blog_sequel" target="_blank" {
+            a class="branding" track="branding" href="https://github.com/Lommix/lommix_blog_sequel" target="_blank" {
                 div class="htmx"{
                     span {"<"}
                     b {"/"}
@@ -72,13 +70,13 @@ pub fn footer() -> Markup {
 
             nav class="footer-navbar"{
                 ul {
-                    li {a class="footer-link" href="https://twitter.com/Lommix1" alt="Twitter" target="_blank" {
+                    li {a track="twitter" class="footer-link" href="https://twitter.com/Lommix1" alt="Twitter" target="_blank" {
                         img height="30" src="/static/images/twitter.svg" {}
                     }}
-                    li {a class="footer-link" href="https://github.com/Lommix" alt="Github" target="_blank" {
+                    li {a track="github" class="footer-link" href="https://github.com/Lommix" alt="Github" target="_blank" {
                         img height="30" src="/static/images/github.svg" {}
                     }}
-                    li { a class="footer-link" href="https://www.youtube.com/channel/UCd1BUXaUHWnnNLWknIgxFHg" target="_blank" alt="Youtube" {
+                    li { a track="youtube" class="footer-link" href="https://www.youtube.com/channel/UCd1BUXaUHWnnNLWknIgxFHg" target="_blank" alt="Youtube" {
                         img height="30" src="/static/images/youtube.svg" {}
                     }}
                 }

@@ -4,7 +4,7 @@ From time to time I really enjoy working under pressure. In the recent bevy jam 
 you were given 1 week and a theme to finish a game from zero. In this case the theme
 was 'A lot of entities'. This was my submission.
 
-<wasm-frame src="/wasm/shepherd/index.html" cover="/wasm/shepherd/screen.jpeg">
+<wasm-frame track="shepard-play" src="/wasm/shepherd/index.html" cover="/wasm/shepherd/screen.jpeg">
 </wasm-frame>
 
 (Click to move - Wheel to zoom)

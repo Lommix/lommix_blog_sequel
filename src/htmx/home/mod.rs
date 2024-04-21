@@ -1,8 +1,6 @@
-use crate::{db, AppState};
-
 use super::HtmxComponent;
+use crate::AppState;
 use axum::{
-    extract::{Path, State},
     response::IntoResponse,
     routing::{get, MethodRouter},
 };
@@ -20,8 +18,7 @@ impl HtmxComponent<AppState> for HomeContent {
     }
 
     fn handle() -> MethodRouter<AppState> {
-        get(|State(state): State<AppState>| async move {
-            _ = db::inc(&state.db_pool, "home").await;
+        get(|| async {
             html!(
                 h1 { "Welcome! Develop with me!" }
 
@@ -33,7 +30,7 @@ impl HtmxComponent<AppState> for HomeContent {
                     to this blog using Web Assembly. It is very raw and sometimes may be broken,
                     depending on what I am currently working on."}
 
-                wasm-frame cover="wasm/panzatier/cover.jpeg" src="wasm/panzatier/index.html" fullscreen="true" {}
+                wasm-frame track="panzatier-play" cover="wasm/panzatier/cover.jpeg" src="wasm/panzatier/index.html" fullscreen="true" {}
 
                 div class="info"{
                     table class="keybind-table"{

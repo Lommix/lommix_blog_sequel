@@ -10,7 +10,7 @@ tools that simplify the creative process.
 
 ### The Enoki web editor
 
-<wasm-frame src="https://lommix.com/wasm/particle/index.html" cover="/media/bevy-enoki/cover.jpg">
+<wasm-frame track="particle-play" src="https://lommix.com/wasm/particle/index.html" cover="/media/bevy-enoki/cover.jpg">
 </wasm-frame>
 
 [Link to the fullscreen Version](https://lommix.com/wasm/particle/index.html)

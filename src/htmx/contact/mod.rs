@@ -1,7 +1,5 @@
-use std::{error::Error, time::Duration};
-
 use super::HtmxComponent;
-use crate::{db, AppState};
+use crate::AppState;
 use axum::{
     extract::State,
     response::{IntoResponse, Response},
@@ -13,6 +11,7 @@ use lettre::{
     Transport,
 };
 use maud::{html, Markup};
+use std::error::Error;
 
 pub struct ContactContent;
 impl HtmxComponent<AppState> for ContactContent {
@@ -29,8 +28,7 @@ impl HtmxComponent<AppState> for ContactContent {
     }
 }
 
-async fn on_get(State(state): State<AppState>) -> Response {
-    _ = db::inc(&state.db_pool, "about").await;
+async fn on_get() -> Response {
     html! {
         div class="contact"{
             h1 {"Contact"}

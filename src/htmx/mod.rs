@@ -13,6 +13,7 @@ mod blog;
 mod contact;
 mod feedback;
 mod home;
+mod track;
 
 pub(crate) fn htmx_router() -> Router<AppState> {
     HtmxRouter::new()
@@ -23,6 +24,7 @@ pub(crate) fn htmx_router() -> Router<AppState> {
         .add(blog::BlogContent)
         .add(contact::ContactContent)
         .add(feedback::Feedback)
+        .add(track::Track)
         .into()
 }
 

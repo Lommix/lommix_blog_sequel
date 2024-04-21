@@ -4,7 +4,7 @@ Quadtrees are data structures for holding spatial information with a complexity 
 These are the foundation of every physics engine. They are also great for boid simulations. Here is an example running in Web Assembly:
 
 
-<bevy-runner wasm-path="/media/QuadtreesInRust/boids-quadtree_bg.wasm.gz" canvas-id="boid-canvas" script-path="/media/QuadtreesInRust/boids-quadtree.js" height="800" style="background-color:black;">
+<bevy-runner track="boid-play" wasm-path="/media/QuadtreesInRust/boids-quadtree_bg.wasm.gz" canvas-id="boid-canvas" script-path="/media/QuadtreesInRust/boids-quadtree.js" height="800" style="background-color:black;">
     <img style="margin: 0 auto;display:block;" src="/media/QuadtreesInRust/cover.jpg"/>
 </bevy-runner>
 

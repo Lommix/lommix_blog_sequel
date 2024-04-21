@@ -42,6 +42,7 @@ impl HtmxComponent<AppState> for ArticleList {
                     @for meta in articles{
                         div class="article-preview" {
                             a
+                                track=(meta.alias)
                                 href=(format!("/article/{}", meta.alias))
                                 hx-push-url=(format!("/article/{}", meta.alias))
                                 hx-get=(format!("/htmx/article/{}", meta.alias))
@@ -51,6 +52,7 @@ impl HtmxComponent<AppState> for ArticleList {
                                 };
                             div {
                                 a
+                                    track=(meta.alias)
                                     href=(format!("/article/{}", meta.alias))
                                     hx-push-url=(format!("/article/{}", meta.alias))
                                     hx-get=(format!("/htmx/article/{}", meta.alias))

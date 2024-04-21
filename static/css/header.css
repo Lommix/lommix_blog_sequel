@@ -28,11 +28,6 @@ header{
 		margin-top: 0.5rem;
 		display: flex;
 		justify-content: space-between;
-		.navbar {
-			display: flex;
-			justify-content: start;
-			font-weight: bold;
-		}
 	}
 }
 
@@ -68,3 +63,36 @@ header ul {
 header p {
 	font-style: italic;
 }
+
+.nav-link.active{
+	color: var(--link-color);
+}
+
+.nav{
+	display: flex;
+	position:relative;
+	--nav-left: 0;
+	--nav-width: 25%;
+}
+
+.nav > * {
+	width: 6rem;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	color: white;
+}
+
+.nav::before{
+	content:"";
+	left: var(--nav-left);
+	width:var(--nav-width);
+	position: absolute;
+	display:block;
+	bottom: 0;
+	height: 4px;
+	border-radius: 1rem;
+	background:var(--link-color);
+	transition: 200ms ease-in-out;
+}
+

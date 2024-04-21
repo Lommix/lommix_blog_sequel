@@ -5,26 +5,81 @@ footer{
 	bottom: 0;
 	padding: 1rem 0;
 	background-color: #1f293b;
-	.footer-navbar{
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
+	display:flex;
+	align-items: center;
 }
 
 footer ul {
 	display: flex;
-	flex-direction: row;
 	gap:  2rem;
 	list-style: none;
 }
 
+footer a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--fs-xl);
+	font-weight: bold;
+}
 
-footer ul li{
+footer a:hover{
+	stroke: var(--fs-clr-secondary);
+	fill: var(--fs-clr-secondary);
+}
+
+.footer-navbar{
+	position:absolute;
+	left: calc(50% - 10rem);
 	display: flex;
 	justify-content: center;
 }
 
-footer ul li a {
+@media screen and (max-width: 1000px){
+	.footer-navbar{
+		left: auto;
+		right: 1rem;
+	}
+}
+
+
+.branding > *{
+	padding: 0;
+}
+
+
+.branding{
+	display: flex;
+	gap: 0.5rem;
+	padding-left: 1rem;
+}
+
+.htmx{
 	font-weight: bold;
+	font-size: var(--fs-3xl);
+	color: black;
+}
+.htmx b{
+	color: blue;
+}
+
+
+.branding > img {
+	margin-bottom: 0.5rem;
+}
+
+
+@media screen and (max-width: 600px){
+	.branding p{
+		display: none;
+	}
+}
+
+.branding >:last-child	{
+	font-size: var(--fs-md);
+}
+
+.ferris{
+	height: 48px;
 }

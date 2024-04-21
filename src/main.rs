@@ -12,7 +12,8 @@ use axum::{
 use clap::Parser;
 use deadpool::unmanaged::Pool;
 use dotenv::dotenv;
-use files::Articles;
+use files::ArticleStore;
+use lettre::message::Mailbox;
 use std::{error::Error, net::SocketAddr, sync::Arc};
 use tokio::net::TcpListener;
 use tower_http::services::{ServeDir, ServeFile};
@@ -20,14 +21,37 @@ use tower_http::services::{ServeDir, ServeFile};
 mod db;
 mod files;
 mod forms;
+mod htmx;
 mod pages;
 mod templates;
 
 #[derive(Debug, Clone)]
 pub struct AppState {
     pub debug: bool,
-    pub articles: Arc<Articles>,
+    pub articles: Arc<ArticleStore>,
     pub db_pool: Pool<rusqlite::Connection>,
+    pub mailer: Arc<MailerConfig>,
+}
+
+#[derive(Debug, Clone)]
+pub struct MailerConfig {
+    smtp_user: String,
+    smtp_pass: String,
+    smtp_host: String,
+    mail_to: Mailbox,
+    mail_from: Mailbox,
+}
+
+impl MailerConfig {
+    fn from_env() -> anyhow::Result<Self> {
+        Ok(Self {
+            smtp_user: std::env::var("SMTP_USER")?,
+            smtp_pass: std::env::var("SMTP_PASS")?,
+            smtp_host: std::env::var("SMTP_HOST")?,
+            mail_to: std::env::var("MAIL_TO")?.parse()?,
+            mail_from: std::env::var("MAIL_FROM")?.parse()?,
+        })
+    }
 }
 
 #[derive(Parser)]
@@ -47,6 +71,7 @@ async fn main() -> anyhow::Result<()> {
         .expect("bad http port");
 
     let db_pool = db::open_or_create_db().await?;
+    let mailer = Arc::new(MailerConfig::from_env().unwrap());
 
     let cmd = Command::parse();
     match cmd {
@@ -54,27 +79,22 @@ async fn main() -> anyhow::Result<()> {
             let state = AppState {
                 debug: true,
                 articles: Arc::new(
-                    Articles::from_dir("blog".into()).expect("Failed to load articles"),
+                    ArticleStore::from_dir("blog".into())
+                        .await
+                        .expect("Failed to load articles"),
                 ),
                 db_pool,
+                mailer,
             };
 
             let serve_router = Router::new()
                 .nest_service("/", ServeDir::new("wasm").precompressed_gzip())
                 .layer(axum::middleware::from_fn(no_cache_middle));
 
-            let page_router = Router::new()
-                .route("/", get(pages::home))
-                .route("/about", get(pages::about))
-                .route("/blog", get(pages::blog))
-                .route("/article/:alias", get(pages::article))
-                .layer(axum::middleware::from_fn_with_state(
-                    state.clone(),
-                    track_clicks,
-                ));
-
             let router = Router::new()
-                .nest("/", page_router)
+                .route("/", get(pages::home))
+                .route("/*page", get(pages::home))
+                .nest("/htmx", htmx::htmx_router())
                 .route("/media/:alias/:file", get(serve_article_media))
                 .route("/feedback", post(forms::feedback_form))
                 .nest_service("/favicon.ico", ServeFile::new("favicon.ico"))
@@ -106,16 +126,6 @@ async fn no_cache_middle(request: Request, next: Next) -> Response {
         .headers_mut()
         .insert(header::CACHE_CONTROL, "no-cache".parse().unwrap());
     response
-}
-
-async fn track_clicks(State(state): State<AppState>, request: Request, next: Next) -> Response {
-    let page_url = request.uri().to_string();
-
-    if let Err(err) = db::inc(&state.db_pool, page_url.as_str()).await {
-        tracing::info!("cannot get con from pool, skip, {}", err);
-    }
-
-    next.run(request).await
 }
 
 pub enum ErrorResponse {

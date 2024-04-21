@@ -1,9 +1,7 @@
 @import url('css/defaults.css');
 @import url('css/highlight.css');
 @import url('css/header.css');
-@import url('css/content.css');
 @import url('css/footer.css');
-
 
 :root{
 	--primary-color: #020617;
@@ -55,4 +53,26 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+
+.loading-spinner{
+	position: relative;
+	width: 100%;
+	min-height: 50rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading-spinner::before{
+	position: absolute;
+	width: 65px;
+	height: 65px;
+	content: url("/static/images/spinner.svg")
+}
+
+main{
+	width: 100%;
+	margin: 5rem 0;
 }

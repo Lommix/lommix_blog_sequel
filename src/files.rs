@@ -12,8 +12,8 @@ const ALLOWED_EXTENSIONS: [&str; 12] = [
 ];
 
 #[derive(Debug)]
-pub struct Articles(Vec<Article>);
-impl Articles {
+pub struct ArticleStore(Vec<Article>);
+impl ArticleStore {
     pub fn find_by_alias(&self, alias: &str) -> Option<&Article> {
         self.0.iter().find(|a| a.meta.alias == alias)
     }
@@ -22,9 +22,18 @@ impl Articles {
         self.0.iter()
     }
 
-    pub fn from_dir(path: PathBuf) -> anyhow::Result<Self> {
+    pub fn count(&self) -> usize {
+        self.0.len()
+    }
+
+    pub async fn from_dir(path: PathBuf) -> anyhow::Result<Self> {
         let mut articles = BlogFsIter::new(path)?.collect::<Vec<_>>();
         articles.sort_by(|a, b| b.meta.published_at.cmp(&a.meta.published_at));
+
+        for article in &mut articles {
+            article.compile().await?;
+        }
+
         Ok(Self(articles))
     }
 }
@@ -77,8 +86,8 @@ impl Into<PageMeta> for ArticleMeta {
         PageMeta {
             title: self.title,
             description: self.teaser,
-            keywords: "".into(),
-            image: Some(self.cover),
+            keywords: self.tags.unwrap_or("".into()),
+            image: Some(format!("https:/lommix.com/{}", self.cover)),
         }
     }
 }

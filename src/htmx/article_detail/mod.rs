@@ -1,5 +1,5 @@
 use super::HtmxComponent;
-use crate::AppState;
+use crate::{db, AppState};
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -27,6 +27,7 @@ impl HtmxComponent<AppState> for ArticleDetail {
                     .flatten()
                 {
                     Some(content) => {
+                        _ = db::inc(&state.db_pool, &format!("visit: {}", alias)).await;
                         html!(div class="article" {(PreEscaped(content))}).into_response()
                     }
                     None => (StatusCode::NOT_FOUND, "Not found").into_response(),

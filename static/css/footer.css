@@ -1,85 +1,81 @@
-footer{
-	box-shadow: 8px 0 0 0 rgba(0,0,0,0.5);
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	padding: 1rem 0;
-	background-color: #1f293b;
-	display:flex;
-	align-items: center;
+footer {
+    box-shadow: 8px 0 0 0 rgba(0, 0, 0, 0.5);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 1rem 0;
+    background-color: #1f293b;
+    display: flex;
+    align-items: center;
 }
 
 footer ul {
-	display: flex;
-	gap:  2rem;
-	list-style: none;
+    display: flex;
+    gap: 2rem;
+    list-style: none;
 }
 
 footer a {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	justify-content: center;
-	font-size: var(--fs-xl);
-	font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-xl);
+    font-weight: bold;
 }
 
-footer a:hover{
-	stroke: var(--fs-clr-secondary);
-	fill: var(--fs-clr-secondary);
+footer a:hover {
+    stroke: var(--fs-clr-secondary);
+    fill: var(--fs-clr-secondary);
 }
 
-.footer-navbar{
-	position:absolute;
-	left: calc(50% - 10rem);
-	display: flex;
-	justify-content: center;
+.footer-navbar {
+    position: absolute;
+    left: calc(50% - 10rem);
+    display: flex;
+    justify-content: center;
 }
 
-@media screen and (max-width: 1000px){
-	.footer-navbar{
-		left: auto;
-		right: 1rem;
-	}
+@media screen and (max-width: 1000px) {
+    .footer-navbar {
+        left: auto;
+        right: 1rem;
+    }
 }
 
-
-.branding > *{
-	padding: 0;
+.branding > * {
+    padding: 0;
 }
 
-
-.branding{
-	display: flex;
-	gap: 0.5rem;
-	padding-left: 1rem;
+.branding {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 1rem;
 }
 
-.htmx{
-	font-weight: bold;
-	font-size: var(--fs-3xl);
-	color: black;
+.htmx {
+    font-weight: bold;
+    font-size: var(--fs-3xl);
+    color: black;
 }
-.htmx b{
-	color: blue;
-}
-
-
-.branding > img {
-	margin-bottom: 0.5rem;
+.htmx b {
+    color: blue;
 }
 
-
-@media screen and (max-width: 600px){
-	.branding p{
-		display: none;
-	}
+@media screen and (max-width: 600px) {
+    .branding p {
+        display: none;
+    }
 }
 
-.branding >:last-child	{
-	font-size: var(--fs-md);
+.branding > p {
+    margin-top: 0.25rem;
 }
 
-.ferris{
-	height: 48px;
+.branding > :last-child {
+    font-size: var(--fs-md);
+}
+
+.ferris {
+    height: 48px;
 }

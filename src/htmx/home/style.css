@@ -1,50 +1,55 @@
-.info{
-	display: flex;
-	gap: 2rem;
-	padding: 2rem 0;
+.info {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
 }
 
-@media screen and (max-width: 800px){
-	.info{
-		flex-direction: column;
-	}
+@media screen and (max-width: 800px) {
+    .info {
+        flex-direction: column;
+    }
 }
 
 .info p {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-.keybind-table{
-	color: white;
-	font-size: var(--fs-md);
-	margin: 0;
-	padding: 0;
-	border-collapse: collapse;
-	border: 1px solid white;
+.keybind-table {
+    color: white;
+    font-size: var(--fs-md);
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border: 1px solid white;
 }
 
-.keybind-table td,th{
-	padding: 0.33rem 1rem;
-	text-align: left;
+.keybind-table td,
+th {
+    padding: 0.33rem 1rem;
+    text-align: left;
 }
 
 .keybind-table tr:first-child {
-	border-bottom: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
-.feedback-button{
-	padding: 0.75rem 1.5rem;
-	font-size: var(--fs-lg);
-	background: var(--clr-accent);
-	color: white;
-	border: none;
-	border-radius: 0.25rem;
-	font-weight: bold;
-	margin: 4rem 0;
-	cursor: pointer;
+.feedback-button {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--fs-lg);
+    background: var(--clr-accent);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    margin: 4rem 0;
+    cursor: pointer;
 }
 
-.feedback-button:hover{
-	background: var(--clr-secondary);
+.feedback-button:hover {
+    background: var(--clr-secondary);
+}
+
+#wasm-frame {
+    animation: phase-in 1s ease-in-out;
 }

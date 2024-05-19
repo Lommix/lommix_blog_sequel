@@ -3,6 +3,7 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 2rem;
+	animation: fade-in 1.0s ease-in-out;
 }
 
 .article-preview img{
@@ -13,5 +14,14 @@
 @media screen and (min-width: 1000px) {
 	.article-preview {
 		grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+	}
+}
+
+@keyframes fade-in{
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
